@@ -23,7 +23,7 @@ export default class App extends Component<Props> {
     super(props);
 
     this.state = {
-      esp2866_ip: '192.168.1.105',
+      esp2866_ip: 'http://192.168.1.105',
       blink_count: '5',
       response: '',
     };
@@ -41,9 +41,7 @@ export default class App extends Component<Props> {
       blink_count,
     } = this.state;
 
-      axios.post(esp2866_ip, parseInt(blink_count, 10))
-        .then(response => this.setState({response}))
-        .catch(response => this.setState({response}));
+      axios.post(esp2866_ip, {'blink_count': parseInt(blink_count, 10)} ).then(response => this.setState({response})).catch(response => this.setState({response}));
   }
 
   render() {
@@ -71,7 +69,6 @@ export default class App extends Component<Props> {
           title='PRESS ME!'
           onPress={ this.handleSubmit }
         />
-        <Text>{ JSON.stringify(response) }</Text>
       </View>
     );
   }
